@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="testJava" default="jar" basedir=".">
+
+    <!-- 環境設定 -->
+    <property environment="env" />
+    <property name="target" value="1.6" />
+    <property name="source" value="1.6" />
+
+    <property name="base.dir" value="." />
+    <property name="srcDir" value="src" />
+    <property name="classDir" value="classes" />
+    <property name="jar.name" value="testJava.jar" />
+    <property name="packageName" value="per.kayu.test" />
+    <!--<property name="lib.home" value="${base.dir}/lib" />-->
+
+    <!--<path id="mtool.classpath">
+        <pathelement location="${lib.home}/common_bat.jar" />
+    	<pathelement location="${lib.home}/commons-beanutils-1.8.0.jar" />
+    	<pathelement location="${lib.home}/commons-digester-1.8.jar" />
+        <pathelement location="${lib.home}/commons-lang3-3.1.jar" />
+    	<pathelement location="${lib.home}/commons-logging-1.0.4.jar" />
+        <pathelement location="${lib.home}/fjsymjdbc4.jar" />
+    	<pathelement location="${lib.home}/icommon.jar" />
+        <pathelement location="${lib.home}/log4j-1.2.8.jar" />
+        <pathelement location="${lib.home}/mail.jar" />
+    </path>-->
+
+    <!-- クラスファイル作成ディレクトリの初期化-->
+    <target name="init">
+        <delete dir="${classDir}" />
+        <mkdir dir="${classDir}" />
+    </target>
+
+    <target name="compile" depends="init">
+        <javac srcdir="${srcDir}" destdir="${classDir}" source="${source}" encoding="UTF-8" >
+            <src path="${srcDir}" />
+            <!--<classpath refid="mtool.classpath" />-->
+        </javac>
+    </target>
+
+    <!--<target name="build" depends="compile">
+        <pathconvert property="libs.project" pathsep=" ">
+            <mapper>
+                <chainedmapper>
+                    <flattenmapper />
+                    <globmapper from="*" to="*" />
+                </chainedmapper>
+            </mapper>
+            <path refid="mtool.classpath" />
+        </pathconvert>
+        <jar jarfile="${jar.name}" basedir="${classDir}">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}" />
+                <attribute name="Class-Path" value="${libs.project}" />
+            </manifest>
+        </jar>
+    </target>-->
+
+    <target name="jar" depends="compile">
+    	<jar jarfile="${jar.name}" basedir="${classDir}" />
+    </target>
+</project>
